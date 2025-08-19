@@ -1,0 +1,55 @@
+# Cursor Rules for PowerShell Environment
+
+## Command Format Rules
+- Always provide commands in PowerShell format
+- Use semicolons (;) instead of && for command chaining
+- Use PowerShell-specific syntax and cmdlets when applicable
+- Avoid bash/Linux-specific commands
+
+## Examples of Correct PowerShell Commands:
+```powershell
+# Multiple commands
+cd item-refinement; bun run server
+
+# Environment variables
+$env:NODE_ENV = "development"
+
+# File operations
+Get-Content .env
+Set-Content -Path .env -Value "KEY=value"
+
+# Directory operations
+New-Item -ItemType Directory -Path "public"
+Remove-Item -Path "temp" -Recurse
+
+# Process management
+Start-Process "bun" -ArgumentList "run", "server"
+```
+
+## Avoid These (Unix/Bash style):
+```bash
+# Don't use these formats:
+cd item-refinement && bun run server  # Use semicolon instead
+export NODE_ENV=development          # Use $env: instead
+cat .env                            # Use Get-Content instead
+mkdir public                        # Use New-Item instead
+```
+
+## Terminal Command Guidelines:
+1. Always assume PowerShell as the default shell
+2. Use PowerShell cmdlets when available
+3. Format multi-command operations with semicolons
+4. Provide PowerShell-compatible file paths (use backslashes or forward slashes both work)
+5. Use PowerShell variable syntax ($env:, $var)
+
+## Project-Specific Commands:
+- Backend server: `bun run server` or `npm run server`
+- Frontend dev: `npm run dev`
+- Install packages: `npm install package-name`
+- Environment setup: `$env:VARIABLE = "value"`
+
+## File Operations:
+- Read files: `Get-Content filename`
+- Write files: `Set-Content -Path filename -Value "content"`
+- Copy files: `Copy-Item source destination`
+- List directory: `Get-ChildItem` or `ls`
